@@ -1,0 +1,13 @@
+{
+  "doc": "Schema to represent a key",
+  "fields": [
+    {
+      "doc": "reference id",
+      "name": "id",
+      "type": "int"
+    }
+  ],
+  "name": "ID",
+  "namespace": "ai.claypot.ingestion",
+  "type": "record"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "FlightEvent",
+  "namespace": "ai.claypot.ingestion",
+  "type": "record",
+  "doc": "Event schema for a flight. Includes flight details and timestamps.",
+  "fields": [
+    {
+      "name": "flight_name",
+      "type": "string",
+      "doc": "Flight name, e.g., UA920"
+    },
+    {
+      "name": "expected_takeoff_time",
+      "type": "long",
+      "doc": "Expected takeoff time as Unix timestamp in seconds, e.g., 1690663838"
+    },
+    {
+      "name": "actual_takeoff_time",
+      "type": "long",
+      "doc": "Actual takeoff time as Unix timestamp in seconds, e.g., 1690663838"
+    },
+    {
+      "name": "delay",
+      "type": "int",
+      "doc": "Delay for takeoff time"
+    },
+    {
+      "name": "flight_time",
+      "type": "int",
+      "doc": "Time of flight"
+    },
+    {
+      "name": "airline",
+      "type": "string",
+      "doc": "Airline name, e.g., United Airlines, American Airlines"
+    },
+    {
+      "name": "departure_airport",
+      "type": "string",
+      "doc": "Departure airport code, e.g., SFO, ORD, MKE"
+    },
+    {
+      "name": "arrival_airport",
+      "type": "string",
+      "doc": "Arrival airport code, e.g., SFO, ORD, MKE"
+    },
+    {
+      "name": "next_flight",
+      "type": "string",
+      "doc": "Info about the next flight"
+    }
+  ]
+}

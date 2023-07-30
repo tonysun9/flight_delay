@@ -1,0 +1,38 @@
+kafka-tx:
+  connector_type: kafka
+  data_type: source
+  schema: schemas.flight_takeoff.FlightTakeoffEvent
+  configs:
+    connector: kafka
+    topic: features
+    scan.startup.mode: earliest-offset
+    properties.bootstrap.servers: kafka-service:29092
+    format: avro-confluent
+    avro-confluent.url: http://schema-registry-service:8081
+---
+redis-default:
+  connector_type: redis
+  data_type: sink
+  configs:
+    connector: redis
+    host: redis-service
+    port: 6379
+    redis-mode: single
+    command: set
+---
+iceberg-tx-raw:
+  connector_type: iceberg
+  data_type: sink
+  configs:
+    connector: iceberg
+    catalog.type: iceberg
+    catalog.catalog-impl: org.apache.iceberg.rest.RESTCatalog
+    catalog.uri: http://iceberg-catalog-service:8189
+    catalog.io-impl: org.apache.iceberg.aws.s3.S3FileIO
+    catalog.warehouse: s3a://warehouse/wh/
+    catalog.s3-endpoint: http://minio-service:9100
+    catalog.s3.endpoint: http://minio-service:9100
+    catalog.s3.path-style-access: true
+    catalog.s3.region: us-east-1
+    table: transactions_raw
+    database: iceberg_db

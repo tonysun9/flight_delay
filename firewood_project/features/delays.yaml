@@ -1,0 +1,44 @@
+# average_delay_airport:
+#   transformation: transformations.delays.average_delay_airport
+#   sources:
+#     takeoff: kafka-tx
+#   sinks:
+#     - redis-default
+#   windows:
+#     - size: 1h
+# ---
+# max_delay_airport:
+#   transformation: transformations.delays.max_delay_airport
+#   sources:
+#     takeoff: kafka-tx
+#   sinks:
+#     - redis-default
+#   windows:
+#     - size: 1h
+min_delay_airport_airline:
+  transformation: transformations.delays.min_delay_airport_airline
+  sources:
+    takeoff: kafka-tx
+  sinks:
+    - redis-default
+  windows:
+    - size: 1h
+---
+average_delay_airport_airline:
+  transformation: transformations.delays.average_delay_airport_airline
+  sources:
+    takeoff: kafka-tx
+  sinks:
+    - redis-default
+    - iceberg-sink-{{ feature.name }}
+  windows:
+    - size: 1h
+---
+max_delay_airport_airline:
+  transformation: transformations.delays.max_delay_airport_airline
+  sources:
+    takeoff: kafka-tx
+  sinks:
+    - redis-default
+  windows:
+    - size: 1h
